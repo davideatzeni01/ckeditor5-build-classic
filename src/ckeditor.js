@@ -31,8 +31,15 @@ import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar';
 // import RestrictedEditingMode from '@ckeditor/ckeditor5-restricted-editing/src/restrictededitingmode';
 import WordCount from '@ckeditor/ckeditor5-word-count/src/wordcount';
 import Comments from '@ckeditor/ckeditor5-comments/src/comments';
+import StandardEditingMode from '@ckeditor/ckeditor5-restricted-editing/src/standardeditingmode';
+import Font from '@ckeditor/ckeditor5-font/src/font';
+import Highlight from '@ckeditor/ckeditor5-highlight/src/highlight';
+import HorizontalLine from '@ckeditor/ckeditor5-horizontal-line/src/horizontalline';
+import Base64UploadAdapter from '@ckeditor/ckeditor5-upload/src/adapters/base64uploadadapter';
+import Alignment from '@ckeditor/ckeditor5-alignment/src/alignment';
 
-export default class ClassicEditor extends ClassicEditorBase {}
+export default class ClassicEditor extends ClassicEditorBase {
+}
 
 // Plugins to include in the build.
 ClassicEditor.builtinPlugins = [
@@ -41,6 +48,7 @@ ClassicEditor.builtinPlugins = [
 	Autoformat,
 	Bold,
 	Italic,
+	Font,
 	BlockQuote,
 	CKFinder,
 	EasyImage,
@@ -59,8 +67,13 @@ ClassicEditor.builtinPlugins = [
 	Table,
 	TableToolbar,
 	// RestrictedEditingMode,
+	StandardEditingMode,
 	WordCount,
 	Comments,
+	Highlight,
+	HorizontalLine,
+	Base64UploadAdapter,
+	Alignment,
 ];
 
 // Editor configuration.
@@ -75,8 +88,17 @@ ClassicEditor.defaultConfig = {
 			'bulletedList',
 			'numberedList',
 			'|',
+			'alignment',
+			'|',
+			'fontSize',
+			'fontFamily',
+			'fontColor',
+			'fontBackgroundColor',
+			'highlight',
+			'|',
 			'indent',
 			'outdent',
+			'horizontalLine',
 			'|',
 			'imageUpload',
 			'blockQuote',
@@ -85,6 +107,7 @@ ClassicEditor.defaultConfig = {
 			'undo',
 			'redo',
 			// 'restrictedEditing',
+			'restrictedEditingException',
 			'comment'
 		]
 	},
