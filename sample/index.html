@@ -100,6 +100,121 @@
 			padding: 0 10px;
 		}
 	</style>
+	<!--	*************************************************************************document style ***************************************************************************-->
+	<style>
+		.document-editor {
+			border: 1px solid var(--ck-color-base-border);
+			border-radius: var(--ck-border-radius);
+
+			/* Set vertical boundaries for the document editor. */
+			max-height: 700px;
+
+			/* This element is a flex container for easier rendering. */
+			display: flex;
+			flex-flow: column nowrap;
+		}
+		.document-editor__editable-container {
+			padding: calc( 2 * var(--ck-spacing-large) );
+			background: var(--ck-color-base-foreground);
+
+			/* Make it possible to scroll the "page" of the edited content. */
+			overflow-y: scroll;
+		}
+
+		.document-editor__editable-container .ck-editor__editable {
+			/* Set the dimensions of the "page". */
+			width: 15.8cm;
+			min-height: 21cm;
+
+			/* Keep the "page" off the boundaries of the container. */
+			padding: 1cm 2cm 2cm;
+
+			border: 1px hsl( 0,0%,82.7% ) solid;
+			border-radius: var(--ck-border-radius);
+			background: white;
+
+			/* The "page" should cast a slight shadow (3D illusion). */
+			box-shadow: 0 0 5px hsla( 0,0%,0%,.1 );
+
+			/* Center the "page". */
+			margin: 0 auto;
+		}
+
+		.document-editor .ck-content,
+		.document-editor .ck-heading-dropdown .ck-list .ck-button__label {
+			font: 16px/1.6 "Helvetica Neue", Helvetica, Arial, sans-serif;
+		}
+		/* Adjust the headings dropdown to host some larger heading styles. */
+		.document-editor .ck-heading-dropdown .ck-list .ck-button__label {
+			line-height: calc( 1.7 * var(--ck-line-height-base) * var(--ck-font-size-base) );
+			min-width: 6em;
+		}
+
+		/* Scale down all heading previews because they are way too big to be presented in the UI.
+        Preserve the relative scale, though. */
+		.document-editor .ck-heading-dropdown .ck-list .ck-button:not(.ck-heading_paragraph) .ck-button__label {
+			transform: scale(0.8);
+			transform-origin: left;
+		}
+
+		/* Set the styles for "Heading 1". */
+		.document-editor .ck-content h2,
+		.document-editor .ck-heading-dropdown .ck-heading_heading1 .ck-button__label {
+			font-size: 2.18em;
+			font-weight: normal;
+		}
+
+		.document-editor .ck-content h2 {
+			line-height: 1.37em;
+			padding-top: .342em;
+			margin-bottom: .142em;
+		}
+
+		/* Set the styles for "Heading 2". */
+		.document-editor .ck-content h3,
+		.document-editor .ck-heading-dropdown .ck-heading_heading2 .ck-button__label {
+			font-size: 1.75em;
+			font-weight: normal;
+			color: hsl( 203, 100%, 50% );
+		}
+
+		.document-editor .ck-heading-dropdown .ck-heading_heading2.ck-on .ck-button__label {
+			color: var(--ck-color-list-button-on-text);
+		}
+
+		/* Set the styles for "Heading 2". */
+		.document-editor .ck-content h3 {
+			line-height: 1.86em;
+			padding-top: .171em;
+			margin-bottom: .357em;
+		}
+
+		/* Set the styles for "Heading 3". */
+		.document-editor .ck-content h4,
+		.document-editor .ck-heading-dropdown .ck-heading_heading3 .ck-button__label {
+			font-size: 1.31em;
+			font-weight: bold;
+		}
+
+		.document-editor .ck-content h4 {
+			line-height: 1.24em;
+			padding-top: .286em;
+			margin-bottom: .952em;
+		}
+
+		/* Set the styles for "Paragraph". */
+		.document-editor .ck-content p {
+			font-size: 1em;
+			line-height: 1.63em;
+			padding-top: .5em;
+			margin-bottom: 1.13em;
+		}
+		.document-editor .ck-content blockquote {
+			font-family: Georgia, serif;
+			margin-left: calc( 2 * var(--ck-spacing-large) );
+			margin-right: calc( 2 * var(--ck-spacing-large) );
+		}
+	</style>
 </head>
 <body>
 
@@ -139,24 +254,20 @@
 <!--	</div>-->
 <!--</div>-->
 <!--	************************************************************************ commenti ********************************************************************************-->
-<div id="container">
-	<div id="editor">
-		<h2>Sample</h2>
+<button id="get-data">Get editor data</button>
 
-		<p>This is an <span class="ck-restricted-editing-exception ck-restricted-editing-exception_selected">instance</span>
-			of the<a href="https://ckeditor.com/docs/ckeditor5/latest/builds/guides/overview.html#classic-editor">classic
-				editor build</a>.</p>
+<div class="document-editor">
+	<div class="document-editor__toolbar"></div>
+	<div class="document-editor__editable-container">
+		<div id="container">
+			<div class="document-editor__editable">
 
-		<figure class="image">
-			<img src="../tests/manual/sample.jpg" alt="Autumn fields"/>
-		</figure>
-
-		<p>You can use this <span class="ck-restricted-editing-exception ck-restricted-editing-exception_selected">sample to validate</span>
-			whether your <a href="https://ckeditor.com/docs/ckeditor5/latest/builds/guides/development/custom-builds.html">custom
-				build</a> works fine.</p>
+			</div>
+			<div id="sidebar"></div>
+		</div>
 	</div>
-	<div id="sidebar"></div>
 </div>
+
 
 <script src="../build/ckeditor.js"></script>
 <script>
@@ -190,13 +301,13 @@
 						commentId: 'comment-1',
 						authorId: 'user-1',
 						content: '<p>Are we sure we want to use a made-up disorder name?</p>',
-						createdAt: new Date( '09/20/2018 14:21:53' )
+						createdAt: new Date('09/20/2018 14:21:53')
 					},
 					{
 						commentId: 'comment-2',
 						authorId: 'user-2',
 						content: '<p>Why not?</p>',
-						createdAt: new Date( '09/21/2018 08:17:01' )
+						createdAt: new Date('09/21/2018 08:17:01')
 					}
 				]
 			}
@@ -223,29 +334,31 @@
                     and the language a person speaks is a essential element of daily life.
                 </p>`
 	};
+
 	class CommentsIntegration {
-		constructor( editor ) {
+		constructor(editor) {
 			this.editor = editor;
 		}
 
 		init() {
-			const usersPlugin = this.editor.plugins.get( 'Users' );
-			const commentsPlugin = this.editor.plugins.get( 'Comments' );
+			const usersPlugin = this.editor.plugins.get('Users');
+			const commentsPlugin = this.editor.plugins.get('Comments');
 
 			// Load the users data.
-			for ( const user of appData.users ) {
-				usersPlugin.addUser( user );
+			for (const user of appData.users) {
+				usersPlugin.addUser(user);
 			}
 
 			// Set the current user.
-			usersPlugin.defineMe( appData.userId );
+			usersPlugin.defineMe(appData.userId);
 
 			// Load the comment threads data.
-			for ( const commentThread of appData.commentThreads ) {
-				commentsPlugin.addCommentThread( commentThread );
+			for (const commentThread of appData.commentThreads) {
+				commentsPlugin.addCommentThread(commentThread);
 			}
 		}
 	}
+
 	// ************************************************************************ numero parole ***************************************************************************
 	// const maxCharacters = 120;
 	// const container = document.querySelector('.demo-update');
@@ -253,7 +366,7 @@
 	// const charactersBox = document.querySelector('.demo-update__chart__characters');
 	// const wordsBox = document.querySelector('.demo-update__words');
 	// const circleCircumference = Math.floor(2 * Math.PI * progressCircle.getAttribute('r'));
-	ClassicEditor.create(document.querySelector('#editor'), {
+	ClassicEditor.create(document.querySelector('.document-editor__editable'), {
 		// ************************************************************************ numero parole ***************************************************************************
 		// Editor configuration.
 		// wordCount: {
@@ -286,25 +399,30 @@
 		// ************************************************************************ commenti ********************************************************************************
 
 		initialData: appData.initialData,
-		extraPlugins: [ CommentsIntegration ],
+		extraPlugins: [CommentsIntegration],
 		licenseKey: 'rF2R0sqZIxE57qiDUNbPky+1kpYtMBG0nkhKCAqjvLlHCwRHxUiX1dVNP13tFxSwec5VrLlJPg==',
 		sidebar: {
 			container: document.querySelector('#sidebar')
 		},
 	})
 		.then(editor => {
-			const comments = editor.plugins.get( 'Comments' );
+			const toolbarContainer = document.querySelector('.document-editor__toolbar');
+
+			toolbarContainer.appendChild(editor.ui.view.toolbar.element);
+
+			const comments = editor.plugins.get('Comments');
 
 			// Get the data on demand.
-			document.querySelector( '#get-data' ).addEventListener( 'click', () => {
+			document.querySelector('#get-data').addEventListener('click', () => {
 				const editorData = editor.data.get();
-				const commentThreadsData = Array.from( comments.getCommentThreads() );
+				const commentThreadsData = Array.from(comments.getCommentThreads());
 
 				// Now, use `editorData` and `commentThreadsData` to save the data in your application.
 				// For example, you can set them as values of hidden input fields.
-				console.log( editorData );
-				console.log( commentThreadsData );
-			} );
+				console.log(editorData);
+				console.log(commentThreadsData);
+				window.editor = editor;
+			});
 		})
 		.catch(error => {
 			console.error('There was a problem initializing the editor.', error);
