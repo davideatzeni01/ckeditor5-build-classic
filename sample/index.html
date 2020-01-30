@@ -78,26 +78,27 @@
 	<!--	************************************************************************ commenti ********************************************************************************-->
 	<style type="text/css">
 		#container {
-			/* To create the column layout. */
 			display: flex;
-
-			/* To make the container relative to its children. */
 			position: relative;
 		}
 
 		#container .ck.ck-editor {
-			/* To stretch the editor to max 700px
-                (just to look nice for this example but it can be any size). */
 			width: 100%;
 			max-width: 700px;
 		}
 
 		#sidebar {
-			/* Set some size for the sidebar (it can be any). */
 			min-width: 300px;
-
-			/* Add some distance. */
 			padding: 0 10px;
+			transition: min-width .4s ease-out-in;
+		}
+
+		#sidebar.narrow {
+			min-width: 65px;
+		}
+
+		#sidebar.hidden {
+			display: none;
 		}
 	</style>
 	<!--	*************************************************************************document style ***************************************************************************-->
@@ -113,8 +114,9 @@
 			display: flex;
 			flex-flow: column nowrap;
 		}
+
 		.document-editor__editable-container {
-			padding: calc( 2 * var(--ck-spacing-large) );
+			padding: calc(2 * var(--ck-spacing-large));
 			background: var(--ck-color-base-foreground);
 
 			/* Make it possible to scroll the "page" of the edited content. */
@@ -129,12 +131,12 @@
 			/* Keep the "page" off the boundaries of the container. */
 			padding: 1cm 2cm 2cm;
 
-			border: 1px hsl( 0,0%,82.7% ) solid;
+			border: 1px hsl(0, 0%, 82.7%) solid;
 			border-radius: var(--ck-border-radius);
 			background: white;
 
 			/* The "page" should cast a slight shadow (3D illusion). */
-			box-shadow: 0 0 5px hsla( 0,0%,0%,.1 );
+			box-shadow: 0 0 5px hsla(0, 0%, 0%, .1);
 
 			/* Center the "page". */
 			margin: 0 auto;
@@ -144,9 +146,10 @@
 		.document-editor .ck-heading-dropdown .ck-list .ck-button__label {
 			font: 16px/1.6 "Helvetica Neue", Helvetica, Arial, sans-serif;
 		}
+
 		/* Adjust the headings dropdown to host some larger heading styles. */
 		.document-editor .ck-heading-dropdown .ck-list .ck-button__label {
-			line-height: calc( 1.7 * var(--ck-line-height-base) * var(--ck-font-size-base) );
+			line-height: calc(1.7 * var(--ck-line-height-base) * var(--ck-font-size-base));
 			min-width: 6em;
 		}
 
@@ -175,7 +178,7 @@
 		.document-editor .ck-heading-dropdown .ck-heading_heading2 .ck-button__label {
 			font-size: 1.75em;
 			font-weight: normal;
-			color: hsl( 203, 100%, 50% );
+			color: hsl(203, 100%, 50%);
 		}
 
 		.document-editor .ck-heading-dropdown .ck-heading_heading2.ck-on .ck-button__label {
@@ -209,10 +212,11 @@
 			padding-top: .5em;
 			margin-bottom: 1.13em;
 		}
+
 		.document-editor .ck-content blockquote {
 			font-family: Georgia, serif;
-			margin-left: calc( 2 * var(--ck-spacing-large) );
-			margin-right: calc( 2 * var(--ck-spacing-large) );
+			margin-left: calc(2 * var(--ck-spacing-large));
+			margin-right: calc(2 * var(--ck-spacing-large));
 		}
 	</style>
 </head>
@@ -263,7 +267,7 @@
 			<div class="document-editor__editable">
 
 			</div>
-			<div id="sidebar"></div>
+<!--			<div id="sidebar"></div>-->
 		</div>
 	</div>
 </div>
@@ -406,6 +410,8 @@
 		},
 	})
 		.then(editor => {
+			const annotations = editor.plugins.get( 'Annotations' );
+			annotations.switchTo( 'inline' );
 			const toolbarContainer = document.querySelector('.document-editor__toolbar');
 
 			toolbarContainer.appendChild(editor.ui.view.toolbar.element);
