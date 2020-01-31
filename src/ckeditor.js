@@ -37,6 +37,14 @@ import Highlight from '@ckeditor/ckeditor5-highlight/src/highlight';
 import HorizontalLine from '@ckeditor/ckeditor5-horizontal-line/src/horizontalline';
 import Base64UploadAdapter from '@ckeditor/ckeditor5-upload/src/adapters/base64uploadadapter';
 import Alignment from '@ckeditor/ckeditor5-alignment/src/alignment';
+import Code from '@ckeditor/ckeditor5-basic-styles/src/code';
+import CodeBlock from '@ckeditor/ckeditor5-code-block/src/codeblock';
+import IndentBlock from '@ckeditor/ckeditor5-indent/src/indentblock';
+import PageBreak from '@ckeditor/ckeditor5-page-break/src/pagebreak';
+import RemoveFormat from '@ckeditor/ckeditor5-remove-format/src/removeformat';
+import Strikethrough from '@ckeditor/ckeditor5-basic-styles/src/strikethrough';
+import TodoList from '@ckeditor/ckeditor5-list/src/todolist';
+import Underline from '@ckeditor/ckeditor5-basic-styles/src/underline';
 
 export default class ClassicEditor extends ClassicEditorBase {
 }
@@ -74,41 +82,53 @@ ClassicEditor.builtinPlugins = [
 	HorizontalLine,
 	Base64UploadAdapter,
 	Alignment,
+	Code,
+	CodeBlock,
+	IndentBlock,
+	PageBreak,
+	RemoveFormat,
+	Strikethrough,
+	TodoList,
+	Underline,
 ];
 
 // Editor configuration.
 ClassicEditor.defaultConfig = {
 	toolbar: {
 		items: [
+			'code',
+			'codeBlock',
 			'heading',
+			'fontBackgroundColor',
+			'fontFamily',
+			'fontColor',
+			'fontSize',
+			'highlight',
 			'|',
+			'strikethrough',
+			'removeFormat',
+			'underline',
 			'bold',
 			'italic',
 			'link',
 			'bulletedList',
 			'numberedList',
+			'todoList',
 			'|',
 			'alignment',
-			'|',
-			'fontSize',
-			'fontFamily',
-			'fontColor',
-			'fontBackgroundColor',
-			'highlight',
-			'|',
 			'indent',
 			'outdent',
+			'pageBreak',
 			'horizontalLine',
 			'|',
-			'imageUpload',
+			'restrictedEditingException',
+			'comment',
 			'blockQuote',
 			'insertTable',
-			'mediaEmbed',
+			'ChemType',
+			'MathType',
 			'undo',
-			'redo',
-			// 'restrictedEditing',
-			'restrictedEditingException',
-			'comment'
+			'redo'
 		]
 	},
 	image: {

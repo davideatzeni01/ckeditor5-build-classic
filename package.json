@@ -65,7 +65,11 @@
     "stylelint-config-ckeditor5": "^1.0.0",
     "terser-webpack-plugin": "^2.2.1",
     "webpack": "^4.39.1",
-    "webpack-cli": "^3.3.6"
+    "webpack-cli": "^3.3.6",
+    "@ckeditor/ckeditor5-code-block": "^16.0.0",
+    "@ckeditor/ckeditor5-mention": "^16.0.0",
+    "@ckeditor/ckeditor5-page-break": "^16.0.0",
+    "@ckeditor/ckeditor5-remove-format": "^16.0.0"
   },
   "engines": {
     "node": ">=8.0.0",
