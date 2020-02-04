@@ -28,10 +28,10 @@ import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph';
 import PasteFromOffice from '@ckeditor/ckeditor5-paste-from-office/src/pastefromoffice';
 import Table from '@ckeditor/ckeditor5-table/src/table';
 import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar';
-// import RestrictedEditingMode from '@ckeditor/ckeditor5-restricted-editing/src/restrictededitingmode';
+import RestrictedEditingMode from '@ckeditor/ckeditor5-restricted-editing/src/restrictededitingmode';
 import WordCount from '@ckeditor/ckeditor5-word-count/src/wordcount';
-import Comments from '@ckeditor/ckeditor5-comments/src/comments';
-import StandardEditingMode from '@ckeditor/ckeditor5-restricted-editing/src/standardeditingmode';
+// import Comments from '@ckeditor/ckeditor5-comments/src/comments';
+// import StandardEditingMode from '@ckeditor/ckeditor5-restricted-editing/src/standardeditingmode';
 import Font from '@ckeditor/ckeditor5-font/src/font';
 import Highlight from '@ckeditor/ckeditor5-highlight/src/highlight';
 import HorizontalLine from '@ckeditor/ckeditor5-horizontal-line/src/horizontalline';
@@ -74,10 +74,10 @@ ClassicEditor.builtinPlugins = [
 	PasteFromOffice,
 	Table,
 	TableToolbar,
-	// RestrictedEditingMode,
-	StandardEditingMode,
+	RestrictedEditingMode,
+	// StandardEditingMode,
 	WordCount,
-	Comments,
+	// Comments,
 	Highlight,
 	HorizontalLine,
 	Base64UploadAdapter,
@@ -121,12 +121,14 @@ ClassicEditor.defaultConfig = {
 			'pageBreak',
 			'horizontalLine',
 			'|',
-			'restrictedEditingException',
-			'comment',
+			// 'restrictedEditingException',
+			'restrictedEditing',
+			// 'comment',
 			'blockQuote',
 			'insertTable',
-			'ChemType',
-			'MathType',
+			'mediaEmbed',
+			'imageUpload',
+			'|',
 			'undo',
 			'redo'
 		]

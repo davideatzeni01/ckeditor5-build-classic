@@ -1,241 +1,93 @@
 <html>
 <head>
 	<meta charSet="utf-8">
+	<link rel="stylesheet" type="text/css" href="./styles.css">
 	<title>CKEditor 5 collaboration with comments</title>
-	<style type="text/css">
-		#container {
-			/* To create the column layout. */
-			display: flex;
-
-			/* To make the container relative to its children. */
-			position: relative;
-		}
-
-		#container .ck.ck-editor {
-			/* To stretch the editor to max 700px
-                (just to look nice for this example but it can be any size). */
-			width: 100%;
-			max-width: 700px;
-		}
-
-		#sidebar {
-			/* Set some size for the sidebar (it can be any). */
-			min-width: 300px;
-
-			/* Add some distance. */
-			padding: 0 10px;
-		}
-	</style>
 </head>
 <body>
-<button id="get-data">Get editor data</button>
-
-<div id="container">
-	<div id="editor"></div>
-	<div id="sidebar"></div>
+<div class="message">
+	<div class="centered">
+		<h2>CKEditor 5 online builder demo - ClassicEditor build</h2>
+	</div>
+</div>
+<div class="centered">
+	<div class="row row-editor">
+		<div class="editor">
+			<h2>Bilingual Personality Disorder</h2>
+			<p>
+				This may be the first time you hear about this made-up disorder but
+				it actually<span class="ck-restricted-editing-exception ck-restricted-editing-exception_selected">isn’t so far from the truth</span>. Even the studies that were conducted almost half a century show that
+				<strong>the language you speak has more effects on you than you realise</strong>.
+			</p>
+			<p>
+				One of the very first experiments conducted on this topic dates back to 1964.
+				<a href="https://www.researchgate.net/publication/9440038_Language_and_TAT_content_in_bilinguals">In the experiment</a>
+				designed by linguist Ervin-Tripp who is an authority expert in psycholinguistic and sociolinguistic studies,
+				adults who are bilingual in English in French were showed series of pictures and were asked to create 3-minute stories.
+				In the end participants emphasized drastically different dynamics for stories in English and French.
+			</p>
+			<p>
+				Another ground-breaking experiment which included bilingual Japanese women married to American men in San Francisco were
+				asked to complete sentences. The goal of the experiment was to investigate whether or not human feelings and thoughts
+				are expressed differently in <strong>different language mindsets</strong>.
+				<span>is a sample from the the experiment:</span>
+			</p>
+			<table>
+				<thead>
+				<tr>
+					<th>fr</th>
+					<th>English</th>
+					<th>Japanese</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr>
+					<td>Real friends should</td>
+					<td>Be very frank</td>
+					<td>Help each other</td>
+				</tr>
+				<tr>
+					<td>I will probably become</td>
+					<td>A teacher</td>
+					<td>A housewife</td>
+				</tr>
+				<tr>
+					<td>When there is a conflict with family</td>
+					<td>I do what I want</td>
+					<td>It's a time of great unhappiness</td>
+				</tr>
+				</tbody>
+			</table>
+			<p>
+				More recent <a href="https://books.google.pl/books?id=1LMhWGHGkRUC">studies</a> show, the language a person speaks affects
+				their cognition, behaviour, emotions and hence <strong>their personality</strong>.
+				This shouldn’t come as a surprise
+				<a href="https://en.wikipedia.org/wiki/Lateralization_of_brain_function">since we already know</a> that different regions
+				of the brain become more active depending on the person’s activity at hand. Since structure, information and especially
+				<strong>the culture</strong> of languages varies substantially and the language a person speaks is an essential element of daily life.
+			</p>
+		</div>
+		<div class="sidebar"></div>
+	</div>
 </div>
 </body>
 <script src="../build/ckeditor.js"></script>
-<script>
-	// Application data will be available under a global variable `appData`.
-	const appData = {
-		// Users data.
-		users: [
-			{
-				id: 'user-1',
-				name: 'Joe Doe',
-				// Note that the avatar is optional.
-				avatar: 'https://randomuser.me/api/portraits/thumb/men/26.jpg'
-			},
-			{
-				id: 'user-2',
-				name: 'Ella Harper',
-				avatar: 'https://randomuser.me/api/portraits/thumb/women/65.jpg'
-			}
-		],
+<script>ClassicEditor
+	.create( document.querySelector( '.editor' ), {
+		licenseKey: '',
+		sidebar: {
+			container: document.querySelector( '.sidebar' )
+		},
+	} )
+	.then( editor => {
+		window.editor = editor;
 
-		// The ID of the current user.
-		userId: 'user-1',
 
-		// Comment threads data.
-		commentThreads: [
-			{
-				threadId: 'thread-1',
-				comments: [
-					{
-						commentId: 'comment-1',
-						authorId: 'user-1',
-						content: '<p>Are we sure we want to use a made-up disorder name?</p>',
-						createdAt: new Date('09/20/2018 14:21:53')
-					},
-					{
-						commentId: 'comment-2',
-						authorId: 'user-2',
-						content: '<p>Why not?</p>',
-						createdAt: new Date('09/21/2018 08:17:01')
-					}
-				]
-			}
-		],
 
-		// Editor initial data.
-		initialData:
-			`<p>
-                    This may be the first <span class="ck-restricted-editing-exception ck-restricted-editing-exception_selected">time you hear about this made-up disorder</span> but it actually isn’t so far from the truth.
-                    As recent <span class="ck-restricted-editing-exception ck-restricted-editing-exception_selected">studies show, the language</span> you speak has more effects on you than you realise.
-                    According to the studies, <span class="ck-restricted-editing-exception ck-restricted-editing-exception_selected">the language</span> a person speaks affects their cognition,
-                    behaviour, emotions and hence <strong>their personality</strong>.
-                </p>
-                <p>
-                    This shouldn’t come as a surprise
-                    <a href="https://en.wikipedia.org/wiki/Lateralization_of_brain_function">since we already know</a>
-                    that different regions of the brain becomes more active depending on the activity.
-                    Since structure, information<span class="ck-restricted-editing-exception ck-restricted-editing-exception_selected"> and especially</span> <strong>the culture</strong> of languages varies substantially
-                    and the language a person <span class="ck-restricted-editing-exception ck-restricted-editing-exception_selected">speaks is a essential</span> element of daily life.
-                </p>`
-	};
 
-	class CommentsIntegration {
-		constructor(editor) {
-			this.editor = editor;
-		}
-
-		init() {
-			const usersPlugin = this.editor.plugins.get('Users');
-			const commentsPlugin = this.editor.plugins.get('Comments');
-
-			// Load the users data.
-			for (const user of appData.users) {
-				usersPlugin.addUser(user);
-			}
-
-			// Set the current user.
-			usersPlugin.defineMe(appData.userId);
-
-			// Load the comment threads data.
-			for (const commentThread of appData.commentThreads) {
-				commentsPlugin.addCommentThread(commentThread);
-			}
-		}
-	}
-
-	ClassicEditor
-		.create(document.querySelector('#editor'), {
-			fontFamily: {
-				options: [
-					'default',
-					'Arial, Helvetica, sans-serif',
-					'Courier New, Courier, monospace',
-					'Georgia, serif',
-					'Lucida Sans Unicode, Lucida Grande, sans-serif',
-					'Tahoma, Geneva, sans-serif',
-					'Times New Roman, Times, serif',
-					'Trebuchet MS, Helvetica, sans-serif',
-					'Verdana, Geneva, sans-serif'
-				]
-			},
-			fontSize: {
-				options: [
-					9,
-					11,
-					13,
-					'default',
-					17,
-					19,
-					21
-				]
-			},
-			fontColor: {
-				colors: [
-					{
-						color: 'hsl(0, 75%, 60%)',
-						label: 'Red'
-					},
-					{
-						color: 'hsl(30, 75%, 60%)',
-						label: 'Orange'
-					},
-					{
-						color: 'hsl(60, 75%, 60%)',
-						label: 'Yellow'
-					},
-					{
-						color: 'hsl(90, 75%, 60%)',
-						label: 'Light green'
-					},
-					{
-						color: 'hsl(120, 75%, 60%)',
-						label: 'Green'
-					},
-				]
-			},
-			fontBackgroundColor: {
-				colors: [
-					{
-						color: 'hsl(0, 75%, 60%)',
-						label: 'Red'
-					},
-					{
-						color: 'hsl(30, 75%, 60%)',
-						label: 'Orange'
-					},
-					{
-						color: 'hsl(60, 75%, 60%)',
-						label: 'Yellow'
-					},
-					{
-						color: 'hsl(90, 75%, 60%)',
-						label: 'Light green'
-					},
-					{
-						color: 'hsl(120, 75%, 60%)',
-						label: 'Green'
-					},
-				]
-			},
-			highlight: {
-				options: [
-					{
-						model: 'greenMarker',
-						class: 'marker-green',
-						title: 'Green marker',
-						color: 'rgb(25, 156, 25)',
-						type: 'marker'
-					},
-					{
-						model: 'yellowMarker',
-						class: 'marker-yellow',
-						title: 'Yellow marker',
-						color: '#cac407',
-						type: 'marker'
-					},
-					{
-						model: 'redPen',
-						class: 'pen-red',
-						title: 'Red pen',
-						color: 'hsl(343, 82%, 58%)',
-						type: 'pen'
-					}
-				]
-			},
-			alignment: {
-				options: [ 'left', 'right' ]
-			},
-			initialData: appData.initialData,
-			extraPlugins: [CommentsIntegration],
-			licenseKey: 'rF2R0sqZIxE57qiDUNbPky+1kpYtMBG0nkhKCAqjvLlHCwRHxUiX1dVNP13tFxSwec5VrLlJPg==',
-			sidebar: {
-				container: document.querySelector('#sidebar')
-			},
-		})
-		.then(editor => {const comments = editor.plugins.get('Comments');
-			document.querySelector('#get-data').addEventListener('click', () => {
-				const editorData = editor.data.get();
-				const commentThreadsData = Array.from(comments.getCommentThreads());
-				console.log(editorData);
-				console.log(commentThreadsData);
-			});
-		})
-		.catch(error => console.error(error));
+	} )
+	.catch( error => {
+		console.error( error );
+	} );
 </script>
 </html>
