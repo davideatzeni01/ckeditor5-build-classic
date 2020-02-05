@@ -5,7 +5,8 @@
 
 // The editor creator to use.
 import ClassicEditorBase from '@ckeditor/ckeditor5-editor-classic/src/classiceditor';
-
+import Subscript from '@ckeditor/ckeditor5-basic-styles/src/subscript';
+import Superscript from '@ckeditor/ckeditor5-basic-styles/src/superscript';
 import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials';
 import UploadAdapter from '@ckeditor/ckeditor5-adapter-ckfinder/src/uploadadapter';
 import Autoformat from '@ckeditor/ckeditor5-autoformat/src/autoformat';
@@ -90,6 +91,8 @@ ClassicEditor.builtinPlugins = [
 	Strikethrough,
 	TodoList,
 	Underline,
+	Subscript,
+	Superscript,
 ];
 
 // Editor configuration.
@@ -104,6 +107,9 @@ ClassicEditor.defaultConfig = {
 			'fontColor',
 			'fontSize',
 			'highlight',
+			'|',
+			'subscript',
+			'superscript',
 			'|',
 			'strikethrough',
 			'removeFormat',

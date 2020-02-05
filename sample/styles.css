@@ -82,7 +82,19 @@ body[data-editor='ClassicEditor'] .sidebar {
 }
 
 /* --------- COMMENTS & TRACK CHANGES FEATURE ---------------------------------------------------------------------- */
-
+.sidebar {
+	padding: 0 15px;
+	position: relative;
+	min-width: var(--ck-sample-sidebar-width);
+	max-width: var(--ck-sample-sidebar-width);
+	font-size: 20px;
+	border: 1px solid hsl(0, 0%, 77%);
+	background: hsl(0, 0%, 98%);
+	border-left: 0;
+	overflow: hidden;
+	min-height: 100%;
+	flex-grow: 1;
+}
 
 /* Do not inherit styles related to the editable editor content. See line 25.*/
 .sidebar .ck-content[role='textbox'],
